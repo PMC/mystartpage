@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <style>
+      body {
+        font-family: sans-serif;
+        background-color: #eee;
+      }
+      a {
+        color: #333;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>My Favorite Websites</h1>
+    <div id="favorite-links">
+      <!-- favorite links will be added here -->
+    </div>
+    <script>
+      // parse the text file containing the links to your favorite websites
+      fetch("favorite-links.txt")
+        .then(response => response.text())
+        .then(data => {
+          // extract the URLs from the text file
+          const links = data.split("\n");
+          // create an <a> element for each link
+          const linkElements = links.map(link => {
+            const a = document.createElement("a");
+            a.href = link;
+            a.title = link;
+            a.innerHTML = link;
+            return a;
+          });
+          // add the <a> elements to the page
+          const container = document.getElementById("favorite-links");
+          linkElements.forEach(linkElement => container.appendChild(linkElement));
+        });
+    </script>
+  </body>
+</html>
